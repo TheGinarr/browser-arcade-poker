@@ -1,0 +1,431 @@
+/* spiel.css · Pokertisch – ovaler Filztisch mit Holzrand (bleibt hell + dunkel gleich) */
+.vr-modi,
+.vr-stufen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0.6rem 0;
+}
+.vr-modi .knopf[aria-pressed="true"],
+.vr-stufen .knopf[aria-pressed="true"] {
+  outline: 2px solid var(--ak);
+  outline-offset: 2px;
+}
+.vr-stufen[hidden],
+.vr-online[hidden],
+.vr-ende[hidden],
+.pk-menue[hidden] {
+  display: none;
+}
+.lu-gruppe {
+  font-weight: 700;
+}
+.vr-online {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+  max-width: 26rem;
+  margin: 0 auto 0.8rem;
+  text-align: center;
+}
+.vr-online form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: end;
+}
+.vr-online label {
+  display: grid;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+.vr-online input {
+  font:
+    700 1.5rem/1.2 ui-monospace,
+    monospace;
+  letter-spacing: 0.35em;
+  text-align: center;
+  text-transform: uppercase;
+  width: 8ch;
+  padding: 0.35rem 0.3rem 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--line);
+  background: var(--panel);
+  color: var(--txt);
+}
+.vr-klein {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin: 0;
+}
+.vr-kopf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0.5rem;
+}
+.vr-kopf [hidden],
+.vr-kopf[hidden] {
+  display: none;
+}
+.vr-code {
+  font:
+    700 1.3rem ui-monospace,
+    monospace;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+}
+.vr-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.2rem;
+  margin: 0 0 0.4rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-align: center;
+  color: #fff7e0;
+}
+.vr-status[data-art="fehler"] {
+  color: #ffb3c1;
+}
+.vr-punkte {
+  text-align: center;
+  min-height: 1.3rem;
+  margin: 0.5rem 0 0;
+  color: var(--mut);
+}
+.vr-ende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.6rem;
+}
+
+.pk-buehne {
+  padding: 0.7rem 0.5rem 1rem;
+}
+.pk-buehne[hidden] {
+  display: none;
+}
+
+/* --- Tisch --- */
+.pk-tisch {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0.3rem auto 0;
+  aspect-ratio: 1 / 1.08;
+  border-radius: 46% / 42%;
+  background: radial-gradient(ellipse at 50% 40%, #2f8a55 0%, #1c6a3e 55%, #12512e 100%);
+  box-shadow:
+    0 0 0 0.55rem #6b3f1d,
+    0 0 0 0.75rem #3b210e,
+    inset 0 0 2.5rem rgba(0, 0, 0, 0.45),
+    0 0.9rem 1.6rem rgba(0, 0, 0, 0.45);
+  margin-bottom: 1.2rem;
+}
+@media (min-width: 640px) {
+  .pk-tisch {
+    aspect-ratio: 16 / 9;
+    border-radius: 50% / 50%;
+  }
+}
+.pk-tisch::before {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border-radius: inherit;
+  border: 2px solid rgba(255, 235, 170, 0.18);
+  pointer-events: none;
+}
+.pk-mitte {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+  width: 86%;
+}
+.pk-board {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  min-height: 3.5rem;
+}
+.pk-topf {
+  font:
+    800 1rem/1 var(--mono, ui-monospace),
+    monospace;
+  color: #fff3c4;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.3rem 0.7rem;
+  border-radius: 99px;
+}
+
+/* --- Karten --- */
+.pk-karte {
+  --b: 2.55rem;
+  width: var(--b);
+  height: calc(var(--b) * 1.4);
+  border-radius: 0.35rem;
+  flex: none;
+  background: #fffdf6;
+  color: #16161c;
+  box-shadow:
+    0 1px 0 #bbb,
+    0 0.2rem 0.4rem rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  place-items: center;
+  font-weight: 800;
+  line-height: 1;
+  border: 1px solid #c9c2ad;
+}
+.pk-karte .r {
+  font-size: calc(var(--b) * 0.46);
+  align-self: end;
+}
+.pk-karte .f {
+  font-size: calc(var(--b) * 0.46);
+  align-self: start;
+}
+.pk-karte.rot {
+  color: #c4122f;
+}
+.pk-karte.ruecken {
+  background: #7a1424 url("./assets/kartenruecken.svg") center / cover;
+  border-color: #f3e2b5;
+}
+.pk-karte.leer {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  border: 1.5px dashed rgba(255, 255, 255, 0.25);
+}
+.pk-karte.sieg {
+  outline: 3px solid #ffd54a;
+  outline-offset: 1px;
+}
+@media (min-width: 640px) {
+  .pk-board .pk-karte {
+    --b: 3.3rem;
+  }
+}
+
+/* --- Plätze --- */
+.pk-platz {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 5.9rem;
+  text-align: center;
+  background: rgba(10, 12, 18, 0.82);
+  color: #f4f1e8;
+  border-radius: 0.6rem;
+  padding: 0.3rem 0.25rem 0.35rem;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.8rem;
+  line-height: 1.15;
+}
+.pk-platz .nm {
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pk-platz .st {
+  font-family: var(--mono, ui-monospace), monospace;
+  color: #ffe08a;
+  font-weight: 700;
+}
+.pk-platz .kt {
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+  margin-top: 0.2rem;
+  min-height: 2.1rem;
+}
+.pk-platz .kt .pk-karte {
+  --b: 1.5rem;
+}
+.pk-platz .tag {
+  font-size: 0.75rem;
+  color: #b9f3c9;
+  min-height: 0.9rem;
+}
+.pk-platz.dran {
+  border-color: #ffd54a;
+  box-shadow:
+    0 0 0 3px rgba(255, 213, 74, 0.35),
+    0 0 1rem rgba(255, 213, 74, 0.5);
+}
+.pk-platz.raus {
+  opacity: 0.5;
+}
+.pk-platz.weg {
+  opacity: 0.35;
+}
+.pk-platz.ich {
+  border-color: #7fd7ff;
+}
+.pk-platz.gewinn {
+  border-color: #ffd54a;
+  background: rgba(70, 52, 0, 0.9);
+}
+.pk-btn {
+  position: absolute;
+  top: -0.55rem;
+  right: -0.45rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  font: 800 0.75rem/1.35rem sans-serif;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+.pk-zeit {
+  position: absolute;
+  left: 0.4rem;
+  right: 0.4rem;
+  bottom: 0.12rem;
+  height: 3px;
+  background: #ffd54a;
+  transform-origin: left;
+  border-radius: 2px;
+}
+.pk-chip {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font:
+    800 0.8rem/1 var(--mono, ui-monospace),
+    monospace;
+  color: #1a1205;
+  background: #ffd54a;
+  padding: 0.2rem 0.45rem 0.2rem 1.35rem;
+  border-radius: 99px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.pk-chip::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 50%;
+  width: 0.9rem;
+  height: 0.9rem;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: repeating-conic-gradient(#c4122f 0 30deg, #fff 30deg 60deg);
+  box-shadow: inset 0 0 0 0.2rem #c4122f;
+}
+
+/* --- eigene Hand + Bedienung --- */
+.pk-hand {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 5.7rem;
+}
+.pk-hand .pk-karte {
+  --b: 4rem;
+}
+.pk-info {
+  text-align: center;
+  min-height: 1.4rem;
+  margin: 0.45rem 0;
+  font-weight: 700;
+  color: #fff7e0;
+}
+.pk-aktionen,
+.pk-schnell {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+.pk-schnell + .pk-regler,
+.pk-regler + .pk-schnell {
+  margin-top: 0.5rem;
+}
+.pk-schnell:has(> :nth-child(2):last-child) {
+  grid-template-columns: 1fr 1fr;
+}
+.pk-aktionen[hidden],
+.pk-erhoehen[hidden] {
+  display: none;
+}
+.pk-aktionen .knopf {
+  min-height: 3rem;
+  font-size: 1rem;
+}
+.pk-erhoehen {
+  max-width: 30rem;
+  margin: 0 auto;
+}
+.pk-regler {
+  display: grid;
+  gap: 0.3rem;
+  color: #fff7e0;
+  font-weight: 700;
+  text-align: center;
+}
+.pk-regler output {
+  font-family: var(--mono, ui-monospace), monospace;
+  color: #ffe08a;
+  font-size: 1.15rem;
+}
+.pk-regler input {
+  width: 100%;
+  accent-color: #ffd54a;
+  height: 2rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pk-board .pk-karte.neu {
+    animation: pk-ein 0.35s ease-out;
+  }
+  @keyframes pk-ein {
+    from {
+      transform: translateY(-0.6rem) rotateY(80deg);
+      opacity: 0;
+    }
+  }
+}
+
+@media (max-width: 639px) {
+  .pk-board .pk-karte {
+    --b: 2rem;
+  }
+  .pk-platz {
+    width: 4.9rem;
+    font-size: 0.75rem;
+  }
+  .pk-board {
+    min-height: 3.1rem;
+  }
+  .pk-tisch {
+    aspect-ratio: 1 / 1.32;
+  }
+}
+.pk-buehne [hidden] {
+  display: none !important;
+}
+.pk-meine {
+  text-align: center;
+  min-height: 1.4rem;
+  margin: 0.4rem 0 0;
+  font-weight: 800;
+  color: #b9f3c9;
+}
+.pk-mitte {
+  z-index: 2;
+}
